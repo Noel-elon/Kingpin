@@ -5,15 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kingpin.Adapters.HoursAdapter
 import com.example.kingpin.R
 import com.example.kingpin.repo.SkillViewModel
 
 class HourFragment : Fragment() {
+    private lateinit var adapter: HoursAdapter
     private lateinit var vm: SkillViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
     override fun onCreateView(
@@ -25,11 +28,15 @@ class HourFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.hourRV)
 
         linearLayoutManager = LinearLayoutManager(context)
-        recyclerView.layoutManager = linearLayoutManager
+
 
         vm = ViewModelProvider(this).get(SkillViewModel::class.java)
         vm.getHoursList()
         vm.hourList.observe(this, Observer {
+            adapter = HoursAdapter(it)
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager = linearLayoutManager
+            adapter.notifyDataSetChanged()
 
 
         })
