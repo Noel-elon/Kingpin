@@ -27,7 +27,17 @@
                 android:background="@color/design_default_color_primary"
                 android:elevation="4dp"
                 app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
-                app:title="@string/app_name" />
+                app:title="@string/app_name">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
+                    android:backgroundTint="@color/design_default_color_primary_dark"
+                    android:text="Submit" />
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
