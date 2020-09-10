@@ -32,7 +32,7 @@ class HourFragment : Fragment() {
 
         vm = ViewModelProvider(this).get(SkillViewModel::class.java)
         vm.getHoursList()
-        vm.hourList.observe(this, Observer {
+        vm.hourList.observe(viewLifecycleOwner, Observer {
             adapter = HoursAdapter(it)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = linearLayoutManager
