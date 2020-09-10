@@ -37,11 +37,12 @@
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar2"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/black"
                 app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
+                app:theme="@style/ToolbarTheme"
                 app:title=""
                 app:titleTextColor="@color/white">
 

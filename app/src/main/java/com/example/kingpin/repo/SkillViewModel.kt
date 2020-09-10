@@ -47,5 +47,15 @@ class SkillViewModel : ViewModel() {
 
     }
 
+    fun sendForm(firstName: String, lastName: String, email: String, github: String) {
+        viewModelScope.launch(Dispatchers.Default) {
+            try {
+                RetrofitBuilder.createSubmitService().sendForm(firstName, lastName, email, github)
+            } catch (e: Exception) {
+                Log.d("Exception: ", e.message.toString())
+            }
+        }
+    }
+
 
 }
