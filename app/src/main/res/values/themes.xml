@@ -18,4 +18,5 @@
         <!-- Customize color of navigation drawer icon and back arrow -->
         <item name="colorControlNormal">@color/white</item>
     </style>
+
 </resources>
