@@ -34,9 +34,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="end"
                     android:layout_margin="8dp"
-                    android:backgroundTint="@color/design_default_color_primary_dark"
+                    android:backgroundTint="@color/white"
                     android:text="Submit"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black" />
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
