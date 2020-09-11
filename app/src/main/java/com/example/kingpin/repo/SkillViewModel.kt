@@ -10,7 +10,8 @@ import com.example.kingpin.models.skillIQ
 import com.example.kingpin.network.RetrofitBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import retrofit2.Call
+
 
 class SkillViewModel : ViewModel() {
     private val il = MutableLiveData<ArrayList<skillIQ>>()
@@ -47,14 +48,9 @@ class SkillViewModel : ViewModel() {
 
     }
 
-    fun sendForm(firstName: String, lastName: String, email: String, github: String) {
-        viewModelScope.launch(Dispatchers.Default) {
-            try {
-                RetrofitBuilder.createSubmitService().sendForm(firstName, lastName, email, github)
-            } catch (e: Exception) {
-                Log.d("Exception: ", e.message.toString())
-            }
-        }
+    fun sendForm(firstName: String, lastName: String, email: String, github: String): Call<Void> {
+
+        return RetrofitBuilder.createSubmitService().sendForm(firstName, lastName, email, github)
     }
 
 

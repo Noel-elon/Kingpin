@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
@@ -14,10 +15,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.kingpin.R
 import com.example.kingpin.repo.SkillViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class FormActivity : AppCompatActivity() {
     private lateinit var vm: SkillViewModel
+    private lateinit var firstName: EditText
+    private lateinit var lastName: EditText
+    private lateinit var email: EditText
+    private lateinit var github: EditText
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,10 +33,10 @@ class FormActivity : AppCompatActivity() {
         setContentView(R.layout.activity_form)
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar2)
         val submit = findViewById<Button>(R.id.submitbutton)
-        val firstName = findViewById<EditText>(R.id.firstnameET)
-        val lastName = findViewById<EditText>(R.id.lastnameET)
-        val email = findViewById<EditText>(R.id.emaillET)
-        val github = findViewById<EditText>(R.id.githubET)
+        firstName = findViewById<EditText>(R.id.firstnameET)
+        lastName = findViewById<EditText>(R.id.lastnameET)
+        email = findViewById<EditText>(R.id.emaillET)
+        github = findViewById<EditText>(R.id.githubET)
         setSupportActionBar(toolbar)
 
         vm = ViewModelProvider(this).get(SkillViewModel::class.java)
@@ -42,6 +50,7 @@ class FormActivity : AppCompatActivity() {
             if (firstName.text.isEmpty() || lastName.text.isEmpty() || email.text.isEmpty() || github.text.isEmpty()) {
                 Toast.makeText(this, "Fill all spaces please", Toast.LENGTH_SHORT).show()
             } else {
+
                 showDialog(this)
 
             }
@@ -62,11 +71,47 @@ class FormActivity : AppCompatActivity() {
         val dialogButton =
             dialog.findViewById(R.id.mainlogbut) as Button
         dialogButton.setOnClickListener {
-            dialog.dismiss()
-            val builder = AlertDialog.Builder(this)
-            val layout = layoutInflater.inflate(R.layout.dialog, null)
-            builder.setView(layout)
-            builder.show()
+            val firstString = firstName.text.toString()
+            val last = lastName.text.toString()
+            val mail = email.text.toString()
+            val git = github.text.toString()
+            val call = vm.sendForm(
+                firstName = firstString,
+                lastName = last,
+                email = mail,
+                github = git
+            )
+            call.enqueue(object : Callback<Void> {
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+
+                }
+
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        dialog.dismiss()
+                        val builder = AlertDialog.Builder(baseContext)
+                        val layout = layoutInflater.inflate(R.layout.dialog, null)
+                        builder.setView(layout)
+                        builder.show()
+                        Log.d(
+                            "successful: ",
+                            response.code().toString() + " " + response.message()
+                        )
+                    } else {
+                        dialog.dismiss()
+                        val builder = AlertDialog.Builder(baseContext)
+                        val layout = layoutInflater.inflate(R.layout.fail_dialog, null)
+                        builder.setView(layout)
+                        builder.show()
+                        Log.d(
+                            "Unsuccessful: ",
+                            response.code().toString() + " " + response.message()
+                        )
+
+                    }
+                }
+
+            })
         }
         dialog.show()
     }
