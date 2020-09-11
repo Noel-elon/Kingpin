@@ -64,6 +64,8 @@ class FormActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.main_dialog)
+
+        val builder = AlertDialog.Builder(this)
         val cancel = dialog.findViewById(R.id.cancelX) as ImageView
         cancel.setOnClickListener {
             dialog.dismiss()
@@ -89,17 +91,15 @@ class FormActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
                         dialog.dismiss()
-                        val builder = AlertDialog.Builder(baseContext)
-                        val layout = layoutInflater.inflate(R.layout.dialog, null)
-                        builder.setView(layout)
-                        builder.show()
                         Log.d(
                             "successful: ",
                             response.code().toString() + " " + response.message()
                         )
+                        val layout = layoutInflater.inflate(R.layout.dialog, null)
+                        builder.setView(layout)
+                        builder.show()
                     } else {
                         dialog.dismiss()
-                        val builder = AlertDialog.Builder(baseContext)
                         val layout = layoutInflater.inflate(R.layout.fail_dialog, null)
                         builder.setView(layout)
                         builder.show()

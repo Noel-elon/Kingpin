@@ -19,8 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.FormActivity" />
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
