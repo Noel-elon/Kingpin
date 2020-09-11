@@ -15,3 +15,5 @@ Picasso
 ![Screenshot_20200911-103042](https://user-images.githubusercontent.com/40652867/92904101-7fe0fe00-f41a-11ea-9b52-101b89aca620.png)
 ![Screenshot_20200911-103045](https://user-images.githubusercontent.com/40652867/92904142-87a0a280-f41a-11ea-9d65-fc17f4347011.png)
 ![Screenshot_20200911-103053](https://user-images.githubusercontent.com/40652867/92904291-a868f800-f41a-11ea-826c-4404c1c8add9.png)
+![Screenshot_20200911-105838](https://user-images.githubusercontent.com/40652867/92908534-372b4400-f41e-11ea-9a32-18bd9c1a1a19.png)
+
