@@ -3,8 +3,11 @@ A leaderboard application, built as a practice project for GADS 2020
 
 ### Libraries and tools used
 Retrofit
+
 Viewpager2
+
 Mvvm architecture
+
 Picasso
 
 #### Screenshots
